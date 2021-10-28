@@ -1,8 +1,10 @@
-import { changeBackground } from "./background";
-import { format } from "date-fns";
-import { parseISO } from "date-fns";
+// import { changeBackground } from "./background";
+// import { format } from "date-fns";
+// import { parseISO } from "date-fns";
 
-require ('dotenv').config();
+require('dotenv').config();
+
+console.log(process.env)
 
 
 const myLocation = document.querySelector('#myLocation');
