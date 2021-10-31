@@ -1,4 +1,3 @@
-import { changeBackground } from "./background";
 import { format } from "date-fns";
 import { parseISO } from "date-fns";
 
@@ -33,9 +32,13 @@ myLocation.addEventListener("input", cityCheck);
 const searchCheck = function(c){
     if(c===true){
         //you can submit
-        getWeather(myLocation.value);
-        //this function will get you weather data and call
+         //this function will get you weather data and call
         //to getTime too
+        getWeather(myLocation.value)
+            .then(weatherInfo => {
+                workObjData(weatherInfo)
+            })
+       
     }else{
         console.log("error in submition")
     }
@@ -56,14 +59,36 @@ function setSuccessFor(input) {
 }
 
 
+//get weather conditions from api
+const getWeather = async function(location){
+    try {
+      const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${weatherKey}`, {mode: 'cors'})
+      const weatherInfo = await response.json();
+      const getTime = await fetch (`https://api.bigdatacloud.net/data/timezone-by-location?latitude=${weatherInfo.coord.lat}
+      &longitude=${weatherInfo.coord.lon}&utcReference=0&key=${timeKey}`, {mode: "cors"});
+      const timeInfo = await getTime.json();
+      const getIcon = await fetch(`https://openweathermap.org/img/wn/${weatherInfo.weather[0].icon}@2x.png`);
+      const iconImg = getIcon.url;
+      const dataObj = {weatherInfo: weatherInfo,
+        timeInfo: timeInfo,
+        iconImg: iconImg}
+      return dataObj
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+
+  
 //work with the data that comes back from api 
-const workObjData = function(time,data){
+const workObjData = function(dataObj){
+    const weatherData = dataObj.weatherInfo;
+    const timeData = dataObj.timeInfo;
+    const iconData = dataObj.iconImg;
 
-    const temperatureandPressure = data.main; 
-    const cityName = data.name;  
-    const skyConditions = data.weather[0].description; 
-    const myIcon = data.weather[0].icon;
-
+    const temperatureandPressure = weatherData.main; 
+    const cityName = weatherData.name;  
+    const skyConditions = weatherData.weather[0].description; 
 
     const celsiusTemp = (temperatureandPressure.temp - 273.15).toFixed(0);
     const celsiusMax = (temperatureandPressure.temp_max - 273.15).toFixed(0);
@@ -83,62 +108,44 @@ const workObjData = function(time,data){
         fahrenheitTemp : fahrenheitTemp,
         fahrenheitMax : fahrenheitMax,
         fahrenheitMin : fahrenheitMin
-    }
+    };
+
+    const dateFormat = parseISO(timeData.localTime);
+    const actualTime = format(dateFormat, 'p');
 
     const myWeather = {
         city : cityName,
         skyConditions : skyConditions,
         celsius: celsius,
         fahrenheit : fahrenheit,
-        myIcon : myIcon
+        myIcon : iconData,
+        actualTime : actualTime
     };
-
-    const dateFormat = parseISO(time);
-    const actualTime = format(dateFormat, 'p');
- 
-    callToDisplay(myWeather, actualTime);
+    displayOnPage(myWeather);
 };
 
-//get time from coordinates
-const getTime = async function(location){
-    const locationLatitude = location.coord.lat;
-    const locationLongitude = location.coord.lon;
-    try{
-        const response = await fetch(`https://api.bigdatacloud.net/data/timezone-by-location?latitude=${locationLatitude}&longitude=${locationLongitude}&utcReference=0&key=${timeKey}`);
-        const currentTime = await response.json();
-        workObjData(currentTime.localTime, location);
-    } catch(error){
-        console.error(error);
-    }
-};
 
-//get weather conditions from api
-const getWeather = async function(location){
-    try {
-      const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${weatherKey}`, {mode: 'cors'})
-      const weatherInfo = await response.json();
-      return getTime(weatherInfo);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
 
 //this is the function that actually display the weather
-const callToDisplay = function(myWeather, actualTime){
+const displayOnPage= function(myWeather){
     const nameH1 = document.createElement('h1');
-	nameH1.innerHTML = myWeather.city;
     const sky = document.createElement('p');
-	sky.innerHTML = myWeather.skyConditions;
     const temp = document.createElement('p');
-	temp.innerHTML = myWeather.celsius.celsiusTemp;
+    const iconVector = document.createElement('img');
+    const timeContainer = document.querySelector('#timeContainer');
+
+
+	nameH1.innerHTML = myWeather.city;    
+	sky.innerHTML = myWeather.skyConditions;
+	temp.innerHTML = `${myWeather.celsius.celsiusTemp}C`;
+    iconVector.src= myWeather.myIcon;
+    timeContainer.innerHTML = myWeather.actualTime;
+
+
     container.appendChild(nameH1); 
     container.appendChild(sky); 
     container.appendChild(temp); 
-    const timeContainer = document.querySelector('#timeContainer');
-    timeContainer.innerHTML = actualTime;
-
-//testing
-
-
-    changeBackground(myWeather.skyConditions,myWeather.myIcon)
+    container.appendChild(iconVector)
 };
+
