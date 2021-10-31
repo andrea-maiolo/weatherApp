@@ -1,18 +1,13 @@
-// import { changeBackground } from "./background";
-// import { format } from "date-fns";
-// import { parseISO } from "date-fns";
-
-require('dotenv').config();
-
-console.log(process.env)
-
+import { changeBackground } from "./background";
+import { format } from "date-fns";
+import { parseISO } from "date-fns";
 
 const myLocation = document.querySelector('#myLocation');
 const myForm = document.querySelector('#myForm'); 
 const container = document.querySelector('#container');
 const small = document.querySelector('#err');
-const timeKey = process.env.TIME_KEY;
-const weatherKey = process.env.WEATHER_KEY;
+const timeKey = '2347030187594937b54c085e9698118e';
+const weatherKey = '9cae58cf169fbd96aa10f3dd1ac14fd0';
 
 //form default prevention
 myForm.addEventListener('submit', (e) =>{
