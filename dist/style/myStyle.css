@@ -1,3 +1,93 @@
+body{
+	background-image: url('https://source.unsplash.com/1600x900/?landscape');
+	display:flex;
+    flex-direction: row-reverse;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#switchTemperature{
+	color:#fff;
+	background:#20262A;
+}
+
+#container{
+	color:#fff;
+	background:#20262A;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-start;
+	padding: 5px;
+    width: 14rem;
+	margin-top: 56px;
+	border-radius: 30px;
+}
+
+#rightC{
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+}
+
+#timeContainer{
+	color:#fff;
+	background:#20262A;
+	margin:5px;
+	width: fit-content;
+	font-size: 2rem;
+	padding:3px;
+	border-radius: 14px;
+}
+
+#myForm{
+	display: flex;
+}
+
+.form-control{
+	background:#20262A;
+	color:#fff;
+	display:grid;
+	grid-template-areas: 
+	'label'
+	'input'
+	'button';
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+	justify-items: center;
+}
+
+#cityLabel{
+	grid-area: label;
+	margin:3px;
+}
+
+#myLocation{
+	grid-area: input;
+	margin:3px;
+}
+
+#search{
+	grid-area: button;
+	background:#003ACF;
+	cursor:pointer;
+}
+
+#switchTemperature {
+	border-radius: 5px;
+	margin-top:3px;
+	cursor:pointer;
+	transition-duration: 0.5s;
+}
+
+#switchTemperature:hover{
+	background:#003ACF;
+}
 
 .form-control.success input {
 	border-color: #2ecc71;

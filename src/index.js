@@ -157,8 +157,12 @@ const displayOnPage = function(myWeather) {
 
     container.appendChild(nameH1);
     container.appendChild(sky);
+    container.appendChild(iconVector);
     container.appendChild(temp);
-    container.appendChild(iconVector)
+
+    //look at this for background
+    let body = document.querySelector('body');
+    body.style.backgroundImage ="url('https://source.unsplash.com/1600x900/?' + myWeater.city')";
 
 };
 
@@ -186,3 +190,6 @@ const cleanPage = function(){
 
 //this is just so the page is not empty at the beginning
 searchCheck(true)
+
+//look at this to for hourly forecast
+//https://api.openweathermap.org/data/2.5/onecall?lat=44.4667&lon=11.4333&exclude=minutely,alerts&units=${units}&appid=20f7632ffc2c022654e4093c6947b4f4
