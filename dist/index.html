@@ -4,16 +4,21 @@
         <link rel="stylesheet" href="style/myStyle.css">
     </head>
     <body>
-        <form id="myForm">
-            <div class="form-control">
-                <label for="location">Enter city</label>
-                <input type="text" required minlength="3" maxlength="15" id="myLocation">
-                <small>Error message</small>
-            </div>
-            <button id="search" type="submit">Search</button>
-        </form>
-        <div id="container"></div>
-        <div id="timeContainer"></div>
+        <div id="rightC">
+            <div id="timeContainer"></div>
+            <form id="myForm">
+                <div class="form-control">
+                    <label id="cityLabel" for="location">Enter city</label>
+                    <input type="text" required minlength="3" maxlength="15" id="myLocation" pattern="^[a-zA-Z]+(,[A-Z]{2})?" value="Bologna,IT">
+                    <small>Error message</small>
+                </div>
+                <button id="search" type="submit"><img width=15 height=15 src="https://www.pinclipart.com/picdir/middle/395-3952831_search-search-icon-vector-png-clipart.png"></button>
+            </form>
+            <button id="switchTemperature">℃/℉</button>
+        </div>
+        <div id="leftC">
+            <div id="container"></div>
+        </div>
     </body>
     <script src="main.js"></script>
 </html>
