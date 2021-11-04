@@ -1,25 +1,26 @@
 body{
-	background-image: url('https://source.unsplash.com/1600x900/?landscape');
 	display:flex;
     flex-direction: row-reverse;
     align-content: center;
     justify-content: space-evenly;
     align-items: center;
+	background-image: url('https://free4kwallpapers.com/uploads/originals/2019/04/19/nice-weather-amp-river-views-wallpaper.jpg');
+	background-size: cover;
 }
 
 #switchTemperature{
 	color:#fff;
-	background:#20262A;
+	background:#000000d0;
 }
 
 #container{
 	color:#fff;
-	background:#20262A;
+	background:#000000d0;
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
 	padding: 5px;
     width: 14rem;
 	margin-top: 56px;
@@ -36,7 +37,7 @@ body{
 
 #timeContainer{
 	color:#fff;
-	background:#20262A;
+	background:#000000d0;
 	margin:5px;
 	width: fit-content;
 	font-size: 2rem;
@@ -49,7 +50,7 @@ body{
 }
 
 .form-control{
-	background:#20262A;
+	background:#000000d0;
 	color:#fff;
 	display:grid;
 	grid-template-areas: 
@@ -74,8 +75,9 @@ body{
 
 #search{
 	grid-area: button;
-	background:#003ACF;
+	background:#1b7842;
 	cursor:pointer;
+	border:thick double #000;
 }
 
 #switchTemperature {
@@ -83,6 +85,8 @@ body{
 	margin-top:3px;
 	cursor:pointer;
 	transition-duration: 0.5s;
+	background:#000000d0;
+	border:none;
 }
 
 #switchTemperature:hover{
@@ -99,10 +103,12 @@ body{
 
 .form-control small {
 	color: #e74c3c;
-	position: absolute;
-	bottom: 0;
-	left: 0;
+	font-size: 15px;
+	bottom:0;
+	left:0;
+	position:absolute;
 	visibility: hidden;
+	background:#000;
 }
 
 .form-control.error small {
