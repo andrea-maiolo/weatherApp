@@ -9,6 +9,7 @@ let myWeatherRightNow;
 const timeKey = '2347030187594937b54c085e9698118e';
 const weatherKey = '9cae58cf169fbd96aa10f3dd1ac14fd0';
 
+
 //form default prevention
 myForm.addEventListener('submit', (e) => {
     e.preventDefault();
